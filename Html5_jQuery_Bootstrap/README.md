@@ -31,7 +31,7 @@ bower install
 ```
 若是都順利的下載套件到本地端, 就可以啟動本地的伺服器了.
 ```
-gulp serve
+gulp serve-dev
 ```
 輸出訊息如下:
 >name@host-123 /html5-boilerplate
