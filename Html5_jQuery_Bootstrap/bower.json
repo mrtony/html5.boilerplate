@@ -1,0 +1,23 @@
+{
+  "name": "HTML5_Boilerplate",
+  "version": "0.0.0",
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0"
+  }
+}
