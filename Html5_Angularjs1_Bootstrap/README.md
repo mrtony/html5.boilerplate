@@ -25,7 +25,7 @@
 安裝完成後, 需要新增package.json設定要用npm安裝的套件. 這裡使用已建立好的package.json即可.
 
 #### 安裝bower
-在安裝好nodejs後, 就可以安裝bower了. 我們裝bower裝在global的環境.
+在安裝好nodejs後, 就可以安裝bower了. 我們裝bower裝在global的環境. (若已安裝過可忽略此步驟)
 
 ``` npm install -g bower```
 
@@ -49,9 +49,13 @@ $ gulp serve-dev
 
 打開Browser後, 輸入localhost:8080即可看到畫面.
 
+### 其它支援的gulp task
+* `gulp serve-dev-livereload` : 支援livereload. 只要變更html, css, js檔, 就會重載頁面.
+* `browser-sync` : 支援多瀏覽器同步, 也支援livereload.
+
 ---
-## 安裝其它函式庫
-使用bower安裝新的函式庫到開發環境:
+## 安裝其它函式庫的方式
+以下以安裝jQuery為範例, 使用bower安裝新jQuery函式庫到開發環境:
 ```
 bower install jquery --save-dev
 ```

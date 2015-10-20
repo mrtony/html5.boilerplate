@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
     connect = require('gulp-connect'),
-    del = require('del'),
     plug = require('gulp-load-plugins')();
+var watch = require('gulp-watch');
+var browserSync = require('browser-sync').create();
 
 var colors = plug.util.colors,
     env = plug.util.env;
@@ -9,41 +10,10 @@ var colors = plug.util.colors,
 
 var paths = require('./gulp.config.json');
 
-
-/**
- * Remove all files from the build folder
- * One way to run clean before all tasks is to run
- * from the cmd line: gulp clean && gulp build
- * @return {Stream}
- */
-gulp.task('clean-all', function(cb) {
-    //console.log('Cleaning: ' + plug.util.colors.blue(paths.build));
-
-    var delPaths = [].concat(paths.build);
-    del(delPaths, cb);
-    
-    var delFiles = [].concat(paths.vendorcssbuild, paths.custcssbuild);
-    console.log(delFiles);
-    del(delFiles, function (err, deletedFiles) {
-        console.log('Files deleted:', deletedFiles.join(', '));
-    });
-    
-});
-
-gulp.task('clean-dev', function(cb) {
-    var delFiles = [].concat(paths.vendorcssbuild, paths.custcssbuild);
-    console.log(delFiles);
-    del(delFiles, function (err, deletedFiles) {
-        console.log('Files deleted:', deletedFiles.join(', '));
-    });
-
-});
-
 gulp.task('livereload', function () {
     gulp.src(['src/client/content/**/*.css', 'src/client/app/**/*.js', 'src/client/app/**/*.html'])
         .pipe(plug.watch(['src/client/content/**/*.css', 'src/client/app/**/*.js', 'src/client/app/**/*.html']))
-        .pipe(connect.reload())
-        .pipe(plug.notify({ message: 'Scripts task complete' }));
+        .pipe(connect.reload());
 });
 
 /**
@@ -221,6 +191,17 @@ gulp.task('serve-build', function() {
     connect.server({
         root: "./build",
         livereload: true
+    });
+});
+
+
+// browser-sync Static server, monitor all js, html, css files then reload page 
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: [paths.client, './']
+        },
+        files: ['src/client/app/**/*.html', 'src/client/app/**/*.css', 'src/client/app/**/*.js']
     });
 });
 
