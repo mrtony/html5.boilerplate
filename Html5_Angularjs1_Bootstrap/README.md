@@ -15,6 +15,7 @@
 * moment
 * numeral
 * toastr
+* ui-bootstrap
 
 ## 使用方式
 首先安裝所需的函式庫及本地伺服器環境. 我使用的是nodejs, gulp和bower.
@@ -33,6 +34,7 @@
 ```
 npm install
 bower install
+tsd install
 ```
 若是都順利的下載套件到本地端, 就可以啟動本地的伺服器了.
 ```
@@ -60,3 +62,29 @@ $ gulp serve-dev
 bower install jquery --save-dev
 ```
 完成後會將它安裝至<bower_components>中, 並且會新增設定到**bower.json**中.
+
+---
+## 使用Visual Studio Code IDE的Intellisense
+VS Code使用type script參考檔來作Intellisense. 我們使用`TSD`模組來安裝管理. 
+
+### 安裝TSD
+```
+npm install tsd -g
+```
+
+### 使用的TS及安裝方式
+舉例來說, 要安裝angularjs模組時, 輸入`tsd install angularjs/ --resolve --save`, 就會建立`typings`的子目錄及`tsd.json`檔. `tsd.json`就像是bower.josn一樣可以用來管理ts套件, 日後只要從github clone專案下來, 
+再用`tsd install`就可以重新復原所有的ts模組.
+
+在此範本中會安裝的範本如下:
+* AngularJS: tsd install angularjs/ --resolve --save
+* ui-router: tsd install angular-ui-router/ --resolve --save
+* ui-router: tsd install angular-ui-bootstrap/ --resolve --save
+* lodash: tsd install lodash/ --resolve --save
+* moment: tsd install moment/ --resolve --save
+* numeral: tsd install numeraljs/ --resolve --save
+
+### 相關資源
+* [教你使用TSD安裝TS及Intellisense - 如何用 Visual Studio Code 開發 AngularJS 應用程式](http://blog.miniasp.com/post/2015/06/08/Using-Visual-Studio-Code-with-AngularJS.aspx)
+* [所有支援的TS的Github - borisyankov/DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped)
+* [TSD官網](http://definitelytyped.org/tsd/)
