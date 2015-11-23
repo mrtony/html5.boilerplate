@@ -16,7 +16,9 @@
     function AppController($router) {
         $router.config([
             { path: '/', redirectTo: '/component3' },
-            { path: '/component3', component: 'component3' }
+            { path: '/component3', component: 'component3' },
+            { path: '/user/:userId', component: 'user' }
+            
         ]);
     }
 

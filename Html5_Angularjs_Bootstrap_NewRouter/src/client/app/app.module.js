@@ -18,7 +18,8 @@
         'app.layout',
         //'app.component1',
         //'app.component2'
-        'app.component3'        
+        'app.component3',
+        'app.user',   
     ]);
     
     //for ui-router debug - optional, can be removed
