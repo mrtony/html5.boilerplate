@@ -1,0 +1,27 @@
+{
+  "name": "angular-tdd-demo",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "CHENCHIH HO"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.7",
+    "chai-as-promised": "~5.1.0"
+  },
+  "dependencies": {
+    "mocha": "~2.3.3",
+    "chai": "~3.4.0",
+    "angular-mocks": "~1.4.7"
+  }
+}

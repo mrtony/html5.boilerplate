@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <title>Promise Examples</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine-html.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/boot.min.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.4.0-rc.2/angular.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.4.0-rc.2/angular-mocks.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      var app = angular.module('search', []);
+
+      app.factory('searchService', function ($q, $http) {
+        var service = {};
+
+        debugger;
+        service.search = function search (query) {
+          // We make use of Angular's $q library to create the deferred instance
+          var deferred = $q.defer();
+
+          return $http.get('http://jsonplaceholder.typicode.com/posts/1')
+              .success(function(data) {
+                // The promise is resolved once the HTTP call is successful.
+                debugger;
+                deferred.resolve(data);
+              })
+              .error(function() {
+                debugger;
+                
+                // The promise is rejected if there is an error with the HTTP call.
+                deferred.reject();
+              });
+
+          // The promise is returned to the caller
+          //return deferred.promise;
+        };
+
+        return service;
+      });
+
+      app.controller('SearchController', function ($scope, searchService) {
+        // The search service returns a promise API
+        searchService.search($scope.query)
+          .then(function(data) {
+            $scope.results = data;
+          })
+          .catch(function() {
+            $scope.error = 'There has been an error!';
+          });
+      });
+
+      describe('Testing $q directly', function () {
+        var deferred;
+        var $q;
+        var $rootScope;
+
+        beforeEach(inject(function(_$q_, _$rootScope_) {
+          $q = _$q_;
+          $rootScope = _$rootScope_;
+          deferred = _$q_.defer();
+        }));
+
+        it('should resolve promise', function () { 
+          var response;
+
+          deferred.promise.then(function(data) {
+            response = data;
+          });
+
+          deferred.resolve('Returned OK!');
+          $rootScope.$apply();
+
+          expect(response).toBe('Returned OK!');
+        });
+        
+        it('should reject promise', function () {
+          var response;
+
+          deferred.promise.then(function(data) {
+            response = data;
+          });
+
+          deferred.promise.catch(function(data) {
+            response = 'Error: ' + data;
+          });
+
+          deferred.reject('500 Status');
+          $rootScope.$apply();
+
+          expect(response).toBe('Error: 500 Status');
+        });
+
+      });
+
+      describe('Testing a Controller that uses a Promise', function () {
+        var $scope;
+        var $q;
+        var deferred;
+
+        beforeEach(module('search'));
+
+        beforeEach(inject(function($controller, _$rootScope_, _$q_, searchService) {
+          $q = _$q_;
+          $scope = _$rootScope_.$new();
+
+          // We use the $q service to create a mock instance of defer
+          deferred = _$q_.defer();
+          
+          // Use a Jasmine Spy to return the deferred promise
+          spyOn(searchService, 'search').and.returnValue(deferred.promise);
+          //spyOn(searchService, 'search').and.callThrough();
+          
+
+          debugger;
+          // Init the controller, passing our spy service instance
+          $controller('SearchController', { 
+            $scope: $scope, 
+            searchService: searchService
+          });
+        }));
+
+        it('should resolve promise', function () {
+          // Setup the data we wish to return for the .then function in the controller
+          debugger;
+          deferred.resolve([{ id: 1 }, { id: 2 }]);
+          
+          // We have to call apply for this to work
+          $scope.$apply();
+
+          // Since we called apply, not we can perform our assertions
+          expect($scope.results).not.toBe(undefined);
+          expect($scope.error).toBe(undefined);
+        });
+        
+        it('should reject promise', function () {
+          // This will call the .catch function in the controller
+          deferred.reject();
+          
+          // We have to call apply for this to work
+          $scope.$apply();
+
+          // Since we called apply, not we can perform our assertions
+          expect($scope.results).toBe(undefined);
+          expect($scope.error).toBe('There has been an error!');
+        });
+
+      });
+      
+    </script>
+
+  </body>
+</html>

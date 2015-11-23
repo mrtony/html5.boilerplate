@@ -1,0 +1,24 @@
+<head>
+	<title>Mocha Spec Runner</title>
+	<link rel="stylesheet" href="bower_components/mocha/mocha.css"></link>		
+</head>
+
+<body>
+	<div id="mocha"></div>
+	<h1>Hello World!</h1>
+	<script src="bower_components/angular/angular.js"></script>	
+	<script src="bower_components/mocha/mocha.js"></script>
+	<script src="bower_components/chai/chai.js"></script>
+    <script src="bower_components/chai-as-promised/lib/chai-as-promised.js"></script>
+	
+	<script>
+		mocha.setup('bdd');
+        chai.should();
+	</script>	
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="../app/core/dataservices.js"></script>
+	<script src="main.spec.js"></script>
+	<script>
+		mocha.run();
+	</script>
+</body>

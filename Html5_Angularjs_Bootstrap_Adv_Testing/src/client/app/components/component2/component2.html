@@ -1,0 +1,21 @@
+<div class="jumbotron">
+
+<h1>{{vm.title}} - HTML5, Angularjs1.x, Bootstrap boilerplate</h1>
+    <p>
+        <span class="fa-stack fa-2x text-success">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+    </span>This is font-awesome font.
+    </p>
+    <p>
+        示範使用factory取得資料，並用ng-repeat顯示內容
+    </p>
+    <a class="btn btn-primary btn-lg" href="404.html" role="button">Learn more</a></p>
+</div>
+<h2>客戶資料列表</h2>
+<ul>
+    <li ng-repeat="person in vm.people track by $index">
+        {{person.firstName}},{{person.lastName}}, tel:{{person.tel}}
+    </li>
+</ul>
+
