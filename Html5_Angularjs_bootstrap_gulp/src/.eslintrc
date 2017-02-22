@@ -1,0 +1,16 @@
+{
+  "extends": "../.eslintrc",
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "globals": {
+    "angular": true,
+    "_": true,
+    "toastr": true,
+    "numeral": true
+  },
+  "rules": {
+    "no-console": 1
+  }
+}
